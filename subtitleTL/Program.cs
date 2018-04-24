@@ -13,8 +13,13 @@ namespace subtitleTL
         static void Main(string[] args)
         {
             string path = Path.GetTempFileName();
-            path = @"I:\Archive\Archive Progs\I2660108s.stl";
-            //path = args[0];
+            //path = @"I:\Archive\Archive Progs\I2660108s.stl";
+            path = args[0];
+            string filenamenoext = Path.GetFileNameWithoutExtension(path);
+            string filepath = Path.GetDirectoryName(path);
+            string outpath = filepath + "\\Output\\" + filenamenoext + "x.stl";
+            Debug.WriteLine(outpath);
+
             using (FileStream fs = File.Open(path, FileMode.Open))
             {
                 Debug.WriteLine(fs.Length);
@@ -56,7 +61,7 @@ namespace subtitleTL
                 Debug.WriteLine("8A 8A ocurrences = " + count);
                 fs.Close();
 
-                using (FileStream fs2 = File.Open("monka.stl", FileMode.Create, FileAccess.Write, FileShare.None))
+                using (FileStream fs2 = File.Open(outpath, FileMode.Create, FileAccess.Write, FileShare.None))
                 {
                    
                     // Add some information to the file.
